@@ -17,6 +17,16 @@ pipeline{
 
         }
 
+        stage('Check Scanner Location') {
+            steps{
+                script{
+                    sh 'ls /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-scanner'
+                }
+            }
+        }
+      
+
+
         stage('SonarQube Analysis') {
             steps {
                 script {

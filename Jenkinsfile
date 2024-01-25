@@ -22,7 +22,7 @@ pipeline{
                 script {
                     
                     withSonarQubeEnv(installationName: 'sonarqube-server') {
-                        sh 'mvn sonar:sonar'
+                        sh 'sonar-scanner'
                     }
                 }
             }

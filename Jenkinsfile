@@ -20,9 +20,9 @@ pipeline{
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'sonarqube-scanner'
+                    
                     withSonarQubeEnv(installationName: 'sonarqube-server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                     }
                 }
             }

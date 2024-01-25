@@ -30,9 +30,11 @@ pipeline{
         stage('SonarQube Analysis') {
             steps {
                 script {
+
+                    def scannerExecutable = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-scanner/bin/sonar-scanner'
                     
                     withSonarQubeEnv(installationName: 'sonarqube-server') {
-                        sh 'sonar-scanner'
+                        sh "${scannerExecutable}"
                     }
                 }
             }

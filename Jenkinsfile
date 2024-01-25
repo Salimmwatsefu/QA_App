@@ -32,9 +32,11 @@ pipeline{
                 script {
 
                     def scannerExecutable = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-scanner/bin/sonar-scanner'
+
+                    def sonarProjectKey = 'weza_challenge'
                     
                     withSonarQubeEnv(installationName: 'sonarqube-server') {
-                        sh "${scannerExecutable}"
+                        sh "${scannerExecutable} -Dsonar.projectKey=${sonarProjectKey}"
                     }
                 }
             }

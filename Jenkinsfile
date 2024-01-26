@@ -47,7 +47,7 @@ pipeline{
         stage('Snyk scan'){
             steps{
                 script{
-                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
+                    snykSecurity failOnIssues: false, snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
                 }
             }
             

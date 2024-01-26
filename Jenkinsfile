@@ -8,7 +8,7 @@ pipeline{
         TIME_STAMP = BUILDVERSION()
         DOCKERHUB_CREDENTIALS = credentials('sjmwatsefu-dockerhub')
         SNYK_INSTALLATION = 'snyk'
-        SNYK_TOKEN = 'snyk-cred'
+        SNYK_TOKEN = 'a4ea0fca-6bc8-4dcd-84da-316c663eb0e3'
     }
 
     stages{

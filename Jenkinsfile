@@ -50,7 +50,7 @@ pipeline{
             steps{
                 script{
 
-                    sh '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=low --all-projects --d --token=${SNYK_TOKEN}'
+                    sh ' DEBUG=*snyk* /var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=low --all-projects --d --token=${SNYK_TOKEN}'
                     
                 }
             }

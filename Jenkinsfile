@@ -50,22 +50,7 @@ pipeline{
             steps{
                 script{
 
-                    try {
-                        snykSecurity(
-                          snykInstallation: SNYK_INSTALLATION,
-                          snykTokenId: SNYK_TOKEN,
-                          failOnIssues: false,
-                          monitorProjectOnBuild: true,
-                          additionalArguments: '--all-projects --d'
-                        )
-                    } catch (Exception e) {
-                      currentBuild.result = 'FAILURE'
-                      pipelineError = true
-                      error("Error during snyk_analysis: ${e.message}")
-                      }
-
-        
-
+                    sh '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=low --all-projects --d --token=${SNYK_TOKEN}'
                     
                 }
             }

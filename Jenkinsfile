@@ -7,7 +7,7 @@ pipeline{
         GIT_COMMIT = getCommit()
         TIME_STAMP = BUILDVERSION()
         DOCKERHUB_CREDENTIALS = credentials('sjmwatsefu-dockerhub')
-        SNYK_INSTALLATION = 'snyk@latest'
+        SNYK_INSTALLATION = 'snyk'
         SNYK_TOKEN = 'snyk-cred'
     }
 

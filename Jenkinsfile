@@ -47,9 +47,9 @@ pipeline{
         stage('Snyk scan'){
             steps{
                 script{
-                    
+                    sh 'env'
 
-                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred', args: '--allow-missing'
+                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
                 }
             }
             

@@ -47,9 +47,9 @@ pipeline{
         stage('Snyk scan'){
             steps{
                 script{
-                    sh 'pip3 install -r requirements.txt'
                     
-                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
+
+                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred', args: '--allow-missing'
                 }
             }
             

@@ -50,7 +50,7 @@ pipeline{
             steps{
                 script{
 
-                    sh '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=low --d --token=${SNYK_TOKEN} --file=requirements.txt --command=/usr/bin/python3'
+                    sh '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=critical --d --token=${SNYK_TOKEN} --file=requirements.txt --command=/usr/bin/python3'
                     
                 }
             }

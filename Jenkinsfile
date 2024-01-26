@@ -44,6 +44,15 @@ pipeline{
             }
         }
 
+        stage('Snyk scan'){
+            steps{
+                script{
+                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
+                }
+            }
+            
+        }
+
         stage('Docker login'){
             steps {
                 script {

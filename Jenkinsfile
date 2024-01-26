@@ -48,7 +48,9 @@ pipeline{
             steps{
                 script{
 
-                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred', additionalArguments: '--json'
+                    sh 'pip install --upgrade pip'
+
+                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
                 }
             }
             

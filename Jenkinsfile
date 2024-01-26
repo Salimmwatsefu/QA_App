@@ -7,6 +7,8 @@ pipeline{
         GIT_COMMIT = getCommit()
         TIME_STAMP = BUILDVERSION()
         DOCKERHUB_CREDENTIALS = credentials('sjmwatsefu-dockerhub')
+        SNYK_INSTALLATION = 'snyk@latest'
+        SNYK_TOKEN = 'snyk-cred'
     }
 
     stages{
@@ -48,8 +50,23 @@ pipeline{
             steps{
                 script{
 
-                    def scanOutput = sh(script: '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=critical', returnStdout: true).trim()
-                    echo "Snyk Scan Output: ${scanOutput}"
+                    try {
+                        snykSecurity(
+                          snykInstallation: SNYK_INSTALLATION,
+                          snykTokenId: SNYK_TOKEN,
+                          failOnIssues: false,
+                          monitorProjectOnBuild: true,
+                          additionalArguments: '--all-projects --d'
+                        )
+                    } catch (Exception e) {
+                      currentBuild.result = 'FAILURE'
+                      pipelineError = true
+                      error("Error during snyk_analysis: ${e.message}")
+                      }
+
+        
+
+                    
                 }
             }
             

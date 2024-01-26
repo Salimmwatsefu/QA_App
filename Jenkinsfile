@@ -48,9 +48,8 @@ pipeline{
             steps{
                 script{
 
-                    sh 'pip install --upgrade pip'
-
-                    snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-cred'
+                    def scanOutput = sh(script: '/var/lib/jenkins/tools/io.snyk.jenkins.tools.SnykInstallation/snyk/snyk-linux test --json --severity-threshold=critical', returnStdout: true).trim()
+                    echo "Snyk Scan Output: ${scanOutput}"
                 }
             }
             

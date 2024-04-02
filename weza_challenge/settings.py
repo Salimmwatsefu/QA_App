@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.CacheMiddleware', #cache middleware
+
 ]
 
 ROOT_URLCONF = 'weza_challenge.urls'
@@ -163,16 +163,4 @@ SIMPLE_JWT = {
 
 # settings.py
 AUTH_USER_MODEL = 'authentication.CustomUser'
-
-
-#cache
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
-    }
-}
-
-CACHE_MIDDLEWARE_SECONDS = 60 * 15  # Set the cache timeout (15 minutes in this example)
-CACHE_MIDDLEWARE_ALIAS = 'default'  # Use the 'default' cache alias
 

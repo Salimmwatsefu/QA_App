@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.CacheMiddleware', #cache middleware
 ]
 
 ROOT_URLCONF = 'weza_challenge.urls'
@@ -84,13 +90,24 @@ WSGI_APPLICATION = 'weza_challenge.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Retrieve values of PostgreSQL connection settings from app settings
+pg_database = os.environ.get('PGDATABASE')
+pg_user = os.environ.get('PGUSER')
+pg_password = os.environ.get('PGPASSWORD')
+pg_host = os.environ.get('PGHOST')
+pg_port = os.environ.get('PGPORT')
+
+# Use the retrieved values in your Django settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': pg_database,
+        'USER': pg_user,
+        'PASSWORD': pg_password,
+        'HOST': pg_host,
+        'PORT': pg_port,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -146,4 +163,16 @@ SIMPLE_JWT = {
 
 # settings.py
 AUTH_USER_MODEL = 'authentication.CustomUser'
+
+
+#cache
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
+
+CACHE_MIDDLEWARE_SECONDS = 60 * 15  # Set the cache timeout (15 minutes in this example)
+CACHE_MIDDLEWARE_ALIAS = 'default'  # Use the 'default' cache alias
 
